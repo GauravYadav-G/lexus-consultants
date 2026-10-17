@@ -194,19 +194,23 @@ export function GlowCard({ children, className = "", tilt = 4 }: { children: Rea
 /* ---------- Animated counter ---------- */
 export function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const [n, setN] = useState(0);
+  const inView = useInView(ref, { once: true, amount: 0.1 });
+  const [n, setN] = useState(to);
+  const animatedRef = useRef(false);
+
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || animatedRef.current) return;
+    animatedRef.current = true;
     const controls = animate(0, to, {
-      duration: 1.8,
+      duration: 1.5,
       ease: EASE,
       onUpdate: (v) => setN(Math.round(v)),
     });
     return () => controls.stop();
   }, [inView, to]);
+
   return (
-    <span ref={ref}>
+    <span ref={ref} className="inline-block tabular-nums">
       {n}
       {suffix}
     </span>

@@ -91,11 +91,18 @@ export function Hero() {
       <section className="border-b border-line bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-2 px-6 md:grid-cols-4">
           {stats.map((s, i) => (
-            <div key={s.label} className={`py-8 md:px-8 ${i > 0 ? "border-l border-line" : ""}`}>
+            <div
+              key={s.label}
+              className={`py-8 px-3 sm:px-6 md:px-8 ${
+                i % 2 === 1 ? "border-l border-line md:border-l-0" : ""
+              } ${i > 0 ? "md:border-l md:border-line" : ""} ${
+                i >= 2 ? "border-t border-line md:border-t-0" : ""
+              }`}
+            >
               <div className="font-display text-3xl font-bold tracking-tight text-navy-900 md:text-4xl">
                 <Counter to={s.value} suffix={s.suffix} />
               </div>
-              <div className="mt-1 text-[12px] font-semibold text-mutedfg">{s.label}</div>
+              <div className="mt-1 text-[12px] font-semibold text-mutedfg leading-snug">{s.label}</div>
             </div>
           ))}
         </div>
