@@ -1,0 +1,14 @@
+export { Hero } from "./home/Hero";
+export { IndustriesMarquee } from "./home/IndustriesMarquee";
+export { About } from "./home/About";
+export { Services } from "./home/Services";
+export { WhyCompliance } from "./home/WhyCompliance";
+export { BeforeAfter } from "./home/BeforeAfter";
+export { Industries } from "./home/Industries";
+export { WhyUs } from "./home/WhyUs";
+export { Process } from "./home/Process";
+export { Laws } from "./home/Laws";
+export { Presence } from "./home/Presence";
+export { FAQ } from "./home/FAQ";
+export { Contact } from "./home/Contact";
+export { CTA } from "./home/CTA";

@@ -1,19 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import {
-  Phone, Menu, X, MapPin, Mail, Globe, MessageCircle, ArrowUp, Clock, ShieldCheck, ArrowRight,
+  Phone, Menu, X, MapPin, Mail, Globe, ArrowUp, Clock, ShieldCheck, ArrowRight, Send,
   ChevronDown
 } from "lucide-react";
 import { contact, nav, services, cities, footerNav } from "../data";
 import { EASE, Magnetic, motion } from "./motion";
 import { Logo } from "./Logo";
 import { Icon } from "./ui";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [payrollOpen, setPayrollOpen] = useState(false);
+  const [payrollMobileOpen, setPayrollMobileOpen] = useState(false);
+  const [consultationOpen, setConsultationOpen] = useState(false);
+  const [consultationSent, setConsultationSent] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
 
@@ -28,6 +33,8 @@ export function Header() {
   useEffect(() => {
     setOpen(false);
     setServicesOpen(false);
+    setPayrollOpen(false);
+    setPayrollMobileOpen(false);
   }, [location.pathname]);
 
   const scheduleClose = () => {
@@ -38,10 +45,37 @@ export function Header() {
   const keepOpen = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setServicesOpen(true);
+    setPayrollOpen(false);
+  };
+
+  const keepPayrollOpen = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setServicesOpen(false);
+    setPayrollOpen(true);
+  };
+
+  const schedulePayrollClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setPayrollOpen(false), 170);
+  };
+
+  const handleConsultationSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const body = [
+      `Name: ${form.get("name")}`,
+      `Company: ${form.get("company")}`,
+      `Phone: ${form.get("phone")}`,
+      `Email: ${form.get("email")}`,
+      `Service: ${form.get("service")}`,
+      `Message: ${form.get("message")}`,
+    ].join("\n");
+    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(`Consultation request - ${form.get("name")}`)}&body=${encodeURIComponent(body)}`;
+    setConsultationSent(true);
   };
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `relative inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[12.5px] 2xl:px-3.5 2xl:text-[13px] font-semibold transition-all duration-200 whitespace-nowrap ${
+    `relative inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[12.5px] xl:px-1.5 xl:text-[11px] 2xl:px-2.5 2xl:text-[12.5px] font-semibold transition-all duration-200 whitespace-nowrap ${
       isActive ? "text-navy-950 font-bold" : "text-mutedfg hover:text-navy-950 hover:bg-gold-50/70"
     }`;
 
@@ -49,16 +83,16 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50">
       {/* Top emergency announcement bar */}
       <motion.div
-        animate={{ height: scrolled ? 0 : 36, opacity: scrolled ? 0 : 1 }}
+        animate={{ height: scrolled ? 0 : 28, opacity: scrolled ? 0 : 1 }}
         transition={{ duration: 0.35, ease: EASE }}
         className="hidden overflow-hidden bg-navy-950 text-[12px] font-medium text-slate-300 md:block"
       >
-        <div className="mx-auto flex h-9 max-w-7xl items-center justify-between px-6">
+        <div className="mx-auto flex h-7 max-w-7xl items-center justify-between px-6">
           <div className="flex items-center gap-2">
             <span className="flex h-2 w-2 animate-pulse rounded-full bg-crimson-500" />
             <span>Pan-India Labour Law &amp; Statutory Compliance · Delhi NCR · Bangalore · Mumbai</span>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="hidden items-center gap-6 xl:flex">
             <span className="inline-flex items-center gap-1.5 text-slate-400">
               <Clock className="h-3.5 w-3.5 text-gold-400" /> Mon – Sat: 10:00 AM – 6:30 PM
             </span>
@@ -81,9 +115,9 @@ export function Header() {
         transition={{ duration: 0.3, ease: EASE }}
         className="relative backdrop-blur-md"
       >
-        <div className="mx-auto flex h-[94px] md:h-[98px] max-w-[1440px] items-center justify-between gap-4 px-6 2xl:px-8">
+        <div className="mx-auto flex h-[78px] sm:h-[86px] md:h-[98px] xl:h-[84px] 2xl:h-[98px] max-w-[1440px] items-center justify-between gap-3 px-4 sm:gap-4 sm:px-6 2xl:px-8">
           {/* Substantially Larger Logo */}
-          <Logo className="block h-14 w-auto max-w-[260px] object-contain transition-transform duration-200 group-hover:scale-[1.03] sm:h-16 sm:max-w-[310px] md:h-[68px] md:max-w-[340px] lg:h-[72px] lg:max-w-[360px]" />
+          <Logo className="block h-12 w-auto max-w-[210px] object-contain transition-transform duration-200 group-hover:scale-[1.03] sm:h-14 sm:max-w-[300px] md:h-[68px] md:max-w-[330px] lg:h-[72px] lg:max-w-[340px] xl:h-14 xl:max-w-[230px] 2xl:h-[72px] 2xl:max-w-[340px]" />
 
           {/* Floating pill navigation (Only Services has hover dropdown) */}
           <nav className="hidden items-center rounded-full border border-line/80 bg-white/85 p-1 shadow-sm xl:flex" aria-label="Main navigation">
@@ -119,8 +153,56 @@ export function Header() {
                 );
               }
 
+              if (n.label === "Payroll & Benefits") {
+                return (
+                  <div
+                    key={n.href}
+                    className="relative"
+                    onMouseEnter={keepPayrollOpen}
+                    onMouseLeave={schedulePayrollClose}
+                    onFocus={keepPayrollOpen}
+                    onBlur={(event) => {
+                      if (!event.currentTarget.contains(event.relatedTarget as Node | null)) schedulePayrollClose();
+                    }}
+                  >
+                    <NavLink to={n.href} aria-haspopup="true" aria-expanded={payrollOpen} className={linkClass}>
+                      {({ isActive }) => (
+                        <>
+                          {isActive && <motion.span layoutId="nav-pill" transition={{ type: "spring", stiffness: 400, damping: 32 }} className="absolute inset-0 -z-10 rounded-full bg-gold-100 ring-1 ring-gold-500/20" />}
+                          <span>{n.label}</span>
+                          <ChevronDown className={`h-3 w-3 text-mutedfg transition-transform duration-200 ${payrollOpen ? "rotate-180 text-navy-950" : ""}`} />
+                        </>
+                      )}
+                    </NavLink>
+                    <AnimatePresence>
+                      {payrollOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 6 }}
+                          transition={{ duration: 0.18, ease: EASE }}
+                          className="absolute left-1/2 top-full z-50 mt-2 w-[min(360px,calc(100vw-32px))] -translate-x-1/2 rounded-2xl border border-line bg-white/98 p-3 text-navy-900 shadow-[0_24px_70px_-20px_rgba(9,23,61,0.22)] backdrop-blur-xl"
+                        >
+                          <p className="px-3 pb-2 pt-1 text-[11px] font-bold uppercase tracking-wider text-crimson-600">Payroll &amp; employee benefits</p>
+                          {[
+                            { label: "Payroll & Benefits Calculators", detail: "PF, ESIC, professional tax and more", href: "/calculators" },
+                            { label: "Payroll Management", detail: "Payroll processing and statutory deductions", href: "/services/payroll-management" },
+                            { label: "Employee Welfare & Benefits", detail: "PF, ESI, gratuity and employee welfare", href: "/services/employee-welfare-benefits" },
+                          ].map((item) => (
+                            <Link key={item.href} to={item.href} onClick={() => setPayrollOpen(false)} className="block rounded-xl px-3 py-2.5 transition hover:bg-cream">
+                              <span className="block text-sm font-bold text-navy-950">{item.label}</span>
+                              <span className="mt-0.5 block text-xs text-mutedfg">{item.detail}</span>
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              }
+
               return (
-                <div key={n.href} onMouseEnter={() => setServicesOpen(false)}>
+                <div key={n.href} onMouseEnter={() => { setServicesOpen(false); setPayrollOpen(false); }}>
                   <NavLink to={n.href} end={n.href === "/"} className={linkClass}>
                     {({ isActive }) => (
                       <>
@@ -141,14 +223,15 @@ export function Header() {
           </nav>
 
           {/* Right action area: Book Consultation button */}
-          <div className="hidden items-center gap-4 xl:flex shrink-0">
+          <div className="hidden shrink-0 items-center gap-2 xl:flex 2xl:gap-4">
             <Magnetic strength={0.2}>
-              <Link
-                to="/contact"
-                className="shimmer relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-navy-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-navy-900/15 transition hover:bg-navy-800"
+              <button
+                type="button"
+                onClick={() => { setConsultationSent(false); setConsultationOpen(true); }}
+                className="shimmer relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-navy-900 px-4 py-2.5 text-xs font-semibold text-white shadow-lg shadow-navy-900/15 transition hover:bg-navy-800 2xl:px-6 2xl:py-3 2xl:text-sm"
               >
                 Book Consultation <ArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
             </Magnetic>
           </div>
 
@@ -213,6 +296,7 @@ export function Header() {
             </motion.div>
           )}
         </AnimatePresence>
+
       </motion.div>
 
       {/* Mobile menu drawer */}
@@ -225,8 +309,26 @@ export function Header() {
             transition={{ duration: 0.3, ease: EASE }}
             className="overflow-hidden border-t border-line bg-cream xl:hidden"
           >
-            <div className="max-h-[calc(100vh-120px)] overflow-y-auto px-6 py-5">
-              {nav.map((n) => (
+            <div className="max-h-[calc(100dvh-120px)] overflow-y-auto px-4 py-4 sm:px-6 sm:py-5">
+              {nav.map((n) => n.label === "Payroll & Benefits" ? (
+                <div key={n.href} className="border-b border-line/60">
+                  <div className="flex items-center gap-2">
+                    <NavLink to={n.href} onClick={() => setOpen(false)} className={({ isActive }) => `flex flex-1 items-center justify-between py-3 font-display text-[15px] font-semibold transition-colors ${isActive ? "font-bold text-crimson-600" : "text-navy-950 hover:text-crimson-600"}`}>
+                      {({ isActive }) => <><span>{n.label}</span>{isActive && <span className="h-1.5 w-1.5 rounded-full bg-crimson-600" />}</>}
+                    </NavLink>
+                    <button type="button" aria-label="Toggle payroll and benefits submenu" aria-expanded={payrollMobileOpen} onClick={() => setPayrollMobileOpen((value) => !value)} className="rounded-lg p-2 text-navy-900 hover:bg-white">
+                      <ChevronDown className={`h-4 w-4 transition-transform ${payrollMobileOpen ? "rotate-180" : ""}`} />
+                    </button>
+                  </div>
+                  {payrollMobileOpen && <div className="space-y-1 pb-3 pl-3">
+                    {[
+                      { label: "Payroll & Benefits Calculators", href: "/calculators" },
+                      { label: "Payroll Management", href: "/services/payroll-management" },
+                      { label: "Employee Welfare & Benefits", href: "/services/employee-welfare-benefits" },
+                    ].map((item) => <NavLink key={item.href} to={item.href} onClick={() => setOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-mutedfg hover:bg-white hover:text-navy-950">{item.label}</NavLink>)}
+                  </div>}
+                </div>
+              ) : (
                 <NavLink
                   key={n.href}
                   to={n.href}
@@ -238,26 +340,78 @@ export function Header() {
                     }`
                   }
                 >
-                  {({ isActive }) => (
-                    <>
-                      <span>{n.label}</span>
-                      {isActive && <span className="h-1.5 w-1.5 rounded-full bg-crimson-600" />}
-                    </>
-                  )}
+                  {({ isActive }) => <><span>{n.label}</span>{isActive && <span className="h-1.5 w-1.5 rounded-full bg-crimson-600" />}</>}
                 </NavLink>
               ))}
-              <Link
-                to="/contact"
-                onClick={() => setOpen(false)}
-                className="mt-5 block rounded-xl bg-navy-900 py-3.5 text-center text-sm font-semibold text-white shadow-md hover:bg-navy-800"
+              <button
+                type="button"
+                onClick={() => { setOpen(false); setConsultationSent(false); setConsultationOpen(true); }}
+                className="mt-5 block w-full rounded-xl bg-navy-900 py-3.5 text-center text-sm font-semibold text-white shadow-md hover:bg-navy-800"
               >
                 Book Free Consultation
-              </Link>
+              </button>
               <div className="mt-4 pt-3 border-t border-line text-xs text-mutedfg flex justify-between items-center">
                 <a href={contact.phoneHref} className="font-semibold text-navy-900">{contact.phone}</a>
                 <a href={`mailto:${contact.email}`} className="text-mutedfg">{contact.email}</a>
               </div>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {consultationOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onMouseDown={(event) => { if (event.target === event.currentTarget) setConsultationOpen(false); }}
+            className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-navy-950/65 p-4 backdrop-blur-sm"
+            role="presentation"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.98 }}
+              transition={{ duration: 0.2, ease: EASE }}
+              className="my-auto w-full max-w-2xl rounded-3xl border border-line bg-white p-6 text-ink shadow-2xl md:p-8"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="consultation-modal-title"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-crimson-600">Free 15-Min Audit</span>
+                  <h2 id="consultation-modal-title" className="mt-1 font-display text-2xl font-bold text-navy-950">Book a consultation</h2>
+                  <p className="mt-1 text-sm text-mutedfg">Share a few details and our team will get back to you.</p>
+                </div>
+                <button type="button" onClick={() => setConsultationOpen(false)} aria-label="Close consultation form" className="rounded-full p-2 text-mutedfg transition hover:bg-muted hover:text-navy-950">
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <form onSubmit={handleConsultationSubmit} className="mt-6 grid gap-4 sm:grid-cols-2">
+                <label className="text-xs font-semibold text-navy-950">Full name *<input required name="name" autoFocus placeholder="Your name" className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm font-normal outline-none focus:border-navy-900" /></label>
+                <label className="text-xs font-semibold text-navy-950">Company<input name="company" placeholder="Company name" className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm font-normal outline-none focus:border-navy-900" /></label>
+                <label className="text-xs font-semibold text-navy-950">Phone number *<input required name="phone" type="tel" placeholder="+91 98765 43210" className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm font-normal outline-none focus:border-navy-900" /></label>
+                <label className="text-xs font-semibold text-navy-950">Email<input name="email" type="email" placeholder="you@company.com" className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm font-normal outline-none focus:border-navy-900" /></label>
+                <label className="text-xs font-semibold text-navy-950 sm:col-span-2">Primary service
+                  <select name="service" defaultValue="" className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm font-normal outline-none focus:border-navy-900">
+                    <option value="">Select a service</option>
+                    {services.map((service) => <option key={service.slug} value={service.title}>{service.title}</option>)}
+                  </select>
+                </label>
+                <label className="text-xs font-semibold text-navy-950 sm:col-span-2">How can we help?
+                  <textarea name="message" rows={3} placeholder="Briefly describe your requirements" className="mt-1.5 w-full resize-y rounded-xl border border-line bg-cream px-4 py-3 text-sm font-normal outline-none focus:border-navy-900" />
+                </label>
+                <div className="sm:col-span-2">
+                  <button type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-navy-900 px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition hover:bg-navy-800">
+                    <Send className="h-4 w-4 text-gold-400" /> Send consultation request
+                  </button>
+                  {consultationSent && <p className="mt-3 text-center text-xs text-emerald-700">Your email draft is ready. Send it from your email app to complete the request.</p>}
+                </div>
+              </form>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -325,6 +479,20 @@ export function Footer() {
         </div>
       </div>
       <div className="relative border-t border-white/10 bg-black/20">
+        <div className="mx-auto flex max-w-7xl justify-center px-6 pt-5 text-xs">
+          <span className="inline-flex items-center gap-2 text-slate-300">
+            <svg className="h-5 w-5 shrink-0 text-gold-400" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.2" />
+              <circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="1.1" />
+              <g stroke="currentColor" strokeWidth=".9" strokeLinecap="round">
+                {Array.from({ length: 24 }, (_, index) => (
+                  <line key={index} x1="12" y1="4" x2="12" y2="10" transform={`rotate(${index * 15} 12 12)`} />
+                ))}
+              </g>
+            </svg>
+            <span>Committed to Compliance, Guided by Law.</span>
+          </span>
+        </div>
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 text-xs text-slate-400 md:flex-row">
           <span>© {new Date().getFullYear()} Lexus Consultants. All Rights Reserved.</span>
           <span>Delhi NCR · Bangalore · Pan-India Practice</span>
@@ -360,6 +528,14 @@ export function FloatingActions() {
         )}
       </AnimatePresence>
       <motion.a
+        href={contact.mobileHref}
+        aria-label={`Call Lexus at ${contact.mobile}`}
+        whileHover={{ scale: 1.06 }}
+        className="grid h-12 w-12 place-items-center rounded-full border border-white/80 bg-white text-navy-950 shadow-xl transition hover:bg-cream"
+      >
+        <Phone className="h-5 w-5 stroke-[2.25]" />
+      </motion.a>
+      <motion.a
         href={contact.whatsapp}
         target="_blank"
         rel="noreferrer"
@@ -368,7 +544,7 @@ export function FloatingActions() {
         className="relative grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-xl"
       >
         <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366]/40" />
-        <MessageCircle className="relative h-6 w-6" />
+        <WhatsAppIcon className="relative h-7 w-7" />
       </motion.a>
     </div>
   );

@@ -30,7 +30,6 @@ export const nav = [
   { label: "Locations", href: "/locations" },
   { label: "Calendar", href: "/calendar" },
   { label: "Insights", href: "/insights" },
-  { label: "FAQs", href: "/faqs" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ];

@@ -45,7 +45,7 @@ export function PageHero({
   crumbs: { label: string; to?: string }[];
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-cream pt-36 pb-16 md:pt-44 md:pb-20">
+    <section className="relative overflow-hidden border-b border-line bg-cream pt-36 pb-12 md:pt-44 md:pb-16">
       <div className="grid-light absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />
       <div className="relative mx-auto max-w-7xl px-6">
         <Breadcrumb items={crumbs} />
@@ -93,7 +93,7 @@ export function Newsletter() {
 
 export function CtaBand({ title = "Turn compliance from a liability into a competitive edge." }: { title?: string }) {
   return (
-    <section className="relative overflow-hidden bg-navy-950 py-16 text-white">
+    <section className="relative overflow-hidden bg-navy-950 py-12 md:py-14 text-white">
       <div className="grid-lines absolute inset-0 opacity-50" />
       <div className="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 px-6 lg:flex-row">
         <div>

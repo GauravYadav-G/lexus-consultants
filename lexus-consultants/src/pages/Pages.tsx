@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import {
-  ArrowRight, ArrowUpRight, CheckCircle2, MapPin, Phone, Mail, Send, Link2, MessageCircle,
+  ArrowRight, ArrowUpRight, CheckCircle2, MapPin, Phone, Mail, Send, Link2,
   Search, Building2,
 } from "lucide-react";
 import {
@@ -12,6 +12,7 @@ import {
 import { Icon, SectionHead } from "../components/ui";
 import { Item, Stagger, Counter } from "../components/motion";
 import { PageHero, PageShell } from "../components/Page";
+import { WhatsAppIcon } from "../components/WhatsAppIcon";
 import aboutImg from "../assets/about.jpg";
 
 /* ================= ABOUT ================= */
@@ -24,7 +25,7 @@ export function AboutPage() {
         sub="Lexus is a professional consultancy helping businesses stay compliant with labour laws and government regulations across India — Advocates and Management Consultants for Industrial Matters."
         crumbs={[{ label: "About" }]}
       />
-      <section className="bg-white py-20">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2">
           <img src={aboutImg} alt="Lexus office" className="aspect-[4/5] w-full rounded-3xl object-cover shadow-2xl" />
           <div>
@@ -48,7 +49,7 @@ export function AboutPage() {
           </div>
         </div>
       </section>
-      <section className="bg-muted py-20">
+      <section className="bg-muted py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHead eyebrow="Why Choose Us" title="Four reasons clients stay with Lexus." />
           <Stagger className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -64,7 +65,7 @@ export function AboutPage() {
           </Stagger>
         </div>
       </section>
-      <section className="bg-white py-20">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHead eyebrow="Our History and Practice" title="Nearly three decades in labour law consultancy." sub="Lexus describes itself as Advocates and Management Consultants for Industrial Matters, combining legal experience with practical compliance support." />
           <div className="mt-12 grid gap-5 md:grid-cols-2">
@@ -78,7 +79,7 @@ export function AboutPage() {
           </div>
         </div>
       </section>
-      <section className="bg-white py-20">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHead eyebrow="Our Promise" title="Transparent, dedicated, proactive." />
           <ul className="mx-auto mt-10 max-w-2xl space-y-3 text-sm">
@@ -107,7 +108,7 @@ export function ServicesPage() {
         sub="From registration to representation — labour law, payroll, licences and HR under one roof across Delhi NCR, Bangalore and Pan India."
         crumbs={[{ label: "Services" }]}
       />
-      <section className="bg-white py-16">
+      <section className="bg-white py-12 md:py-14">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-wrap justify-center gap-2">
             {cats.map((c) => (
@@ -116,6 +117,9 @@ export function ServicesPage() {
               </button>
             ))}
           </div>
+          <Link to="/labour-law-consultants" className="mx-auto mt-7 flex w-fit items-center gap-2 rounded-full border border-line bg-cream px-5 py-2.5 text-sm font-semibold text-navy-900 transition hover:border-navy-900 hover:bg-white">
+            Read our labour law consultancy guide <ArrowRight className="h-4 w-4" />
+          </Link>
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {list.map((s) => (
               <Link key={s.slug} to={`/services/${s.slug}`} className="group flex h-full flex-col rounded-2xl border border-line bg-cream p-7 transition hover:-translate-y-1 hover:border-navy-900 hover:shadow-xl">
@@ -147,7 +151,7 @@ export function LabourLawsPage() {
         sub="Lexus advises businesses on labour legislation, statutory compliance, employee matters and representation. Requirements depend on your workforce, operations and location."
         crumbs={[{ label: "Labour Laws" }]}
       />
-      <section className="bg-white py-16 md:py-20">
+      <section className="bg-white py-12 md:py-14">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHead eyebrow="India’s Labour Codes" title="Four Codes, a consolidated framework." sub="The four Labour Codes came into force on 21 November 2025. State rules and transition requirements may affect what applies to a particular establishment." />
           <div className="mt-10 grid gap-5 md:grid-cols-2">
@@ -166,7 +170,7 @@ export function LabourLawsPage() {
           </div>
         </div>
       </section>
-      <section className="bg-muted py-16 md:py-20">
+      <section className="bg-muted py-12 md:py-14">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2">
           <div>
             <SectionHead center={false} eyebrow="Legislation and subject areas" title="Compliance coverage" sub="Support spans registrations, periodic filings, registers, returns, inspection support and advice on employment matters." />
@@ -201,7 +205,7 @@ export function ServiceDetailPage() {
         sub={s.desc}
         crumbs={[{ label: "Services", to: "/services" }, { label: s.title }]}
       />
-      <section className="bg-white py-16">
+      <section className="bg-white py-12 md:py-14">
         <div className="mx-auto grid max-w-7xl items-start gap-12 px-6 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <h2 className="font-display text-2xl font-bold text-ink">What this engagement covers</h2>
@@ -231,7 +235,7 @@ export function ServiceDetailPage() {
             </ol>
           </div>
           <aside className="lg:col-span-4">
-            <div className="sticky top-36 rounded-3xl border border-line bg-cream p-7">
+            <div className="rounded-3xl border border-line bg-cream p-5 sm:p-7 lg:sticky lg:top-36">
               <h3 className="font-display text-lg font-bold text-ink">Talk to a consultant</h3>
               <p className="mt-2 text-sm text-mutedfg">Contact our team to discuss your {s.title.toLowerCase()} requirements.</p>
               <Link to="/contact" className="mt-5 flex items-center justify-center gap-2 rounded-full bg-navy-900 py-3 text-sm font-bold text-white">
@@ -272,7 +276,7 @@ export function FaqsPage() {
         sub="Straight answers from Lexus consultants — on PF, ESIC, labour law, licences, payroll and pricing."
         crumbs={[{ label: "FAQs" }]}
       />
-      <section className="bg-white py-16">
+      <section className="bg-white py-12 md:py-14">
         <div className="mx-auto max-w-3xl px-6">
           <div className="mb-8 flex items-center gap-3 rounded-xl border border-line bg-cream px-4 py-3">
             <Search className="h-4 w-4 text-mutedfg" />
@@ -308,7 +312,7 @@ export function InsightsPage() {
         sub="Practical guidance on labour law compliance, the Labour Codes and the steps employers can take to review their policies and records."
         crumbs={[{ label: "Insights" }]}
       />
-      <section className="bg-white py-16">
+      <section className="bg-white py-12 md:py-14">
         <div className="mx-auto grid max-w-7xl gap-6 px-6 md:grid-cols-2 lg:grid-cols-3">
           {insights.map((a) => (
             <Link key={a.slug} to={`/insights/${a.slug}`} className="group flex flex-col rounded-2xl border border-line bg-cream p-7 transition hover:-translate-y-1 hover:shadow-xl">
@@ -334,7 +338,7 @@ export function InsightDetailPage() {
   return (
     <PageShell>
       <PageHero eyebrow={a.tag} title={a.title} sub={a.desc} crumbs={[{ label: "Insights", to: "/insights" }, { label: a.title }]} />
-      <article className="bg-white py-16">
+      <article className="bg-white py-12 md:py-14">
         <div className="mx-auto max-w-3xl px-6">
           <p className="text-xs font-semibold tracking-wider text-mutedfg uppercase">{a.date} · {a.read}</p>
           <p className="mt-6 text-lg leading-relaxed text-ink">{a.body}</p>
@@ -370,7 +374,7 @@ export function ContactPage() {
         sub="Tell us about your business and compliance requirements. Our team will get in touch to understand how we can help."
         crumbs={[{ label: "Contact" }]}
       />
-      <section className="bg-white py-16">
+      <section className="bg-white py-12 md:py-14">
         <div className="mx-auto grid max-w-7xl items-start gap-12 px-6 lg:grid-cols-12">
           <div className="space-y-4 lg:col-span-5">
             {[
@@ -387,7 +391,7 @@ export function ContactPage() {
               </a>
             ))}
             <a href={contact.whatsapp} target="_blank" rel="noreferrer" className="flex gap-4 rounded-2xl border border-line bg-cream p-5">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#25D366] text-white"><MessageCircle className="h-5 w-5" /></span>
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#25D366] text-white"><WhatsAppIcon className="h-5 w-5" /></span>
               <span><span className="block text-[11px] font-bold tracking-wider text-mutedfg uppercase">WhatsApp</span><span className="mt-1 block font-semibold text-ink">{contact.mobile}</span></span>
             </a>
             <div className="rounded-2xl border border-line bg-cream p-5">
@@ -444,7 +448,7 @@ export function CareersPage() {
         sub="Almost three decades of practice. Real ownership from day one — with the mentorship to grow into a partner."
         crumbs={[{ label: "Careers" }]}
       />
-      <section className="bg-white py-16">
+      <section className="bg-white py-12 md:py-14">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-3xl rounded-3xl border border-line bg-cream p-8 text-center md:p-12">
             <h2 className="font-display text-2xl font-bold text-navy-900">Interested in working with Lexus?</h2>
@@ -467,7 +471,7 @@ export function LocationsPage() {
         sub="Lexus publishes its head-office and branch contact details, and describes its labour law consultancy support as Pan India."
         crumbs={[{ label: "Locations" }]}
       />
-      <section className="bg-white py-16">
+      <section className="bg-white py-12 md:py-14">
         <div className="mx-auto max-w-7xl px-6">
           <div className="rounded-3xl border border-line bg-cream p-8 md:p-12">
             <div className="flex items-start gap-4">
@@ -501,34 +505,6 @@ export function LocationsPage() {
   );
 }
 
-/* ================= CALCULATORS ================= */
-export function CalculatorsPage() {
-  return (
-    <PageShell>
-      <PageHero
-        eyebrow="Payroll and benefits"
-        title="Review wages, payroll and employee benefits."
-        sub="Calculation requirements depend on the applicable Labour Code, rules, employee category and state. Lexus can help review payroll processes and statutory obligations for your organisation."
-        crumbs={[{ label: "Payroll & Benefits" }]}
-      />
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="rounded-3xl border border-line bg-cream p-8 md:p-12">
-            <h2 className="font-display text-2xl font-bold text-navy-900">What to review</h2>
-            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {["Wage structure and payroll definitions", "PF, ESI and other social security processes", "Bonus, gratuity and employee benefits", "State-specific rules and registers", "Appointment letters and employment policies", "Payroll records and statutory filings"].map((item) => (
-                <li key={item} className="flex gap-3 rounded-xl border border-line bg-white p-4 text-sm text-ink"><CheckCircle2 className="h-5 w-5 shrink-0 text-crimson-600" />{item}</li>
-              ))}
-            </ul>
-            <p className="mt-6 text-xs leading-relaxed text-mutedfg">This page provides general information, not a wage or statutory benefit calculation. Confirm current legal requirements for your employees and locations before processing payroll.</p>
-            <Link to="/contact" className="mt-7 inline-flex items-center gap-2 rounded-full bg-navy-900 px-6 py-3 text-sm font-bold text-white">Request a payroll review <ArrowRight className="h-4 w-4" /></Link>
-          </div>
-        </div>
-      </section>
-    </PageShell>
-  );
-}
-
 /* ================= CALENDAR ================= */
 export function CalendarPage() {
   return (
@@ -539,12 +515,12 @@ export function CalendarPage() {
         sub="A planning checklist for payroll, registrations, records and periodic returns. Specific obligations and deadlines vary by law, state and establishment."
         crumbs={[{ label: "Compliance Calendar" }]}
       />
-      <section className="bg-white py-16">
+      <section className="bg-white py-12 md:py-14">
         <div className="mx-auto max-w-5xl px-6">
           <h2 className="font-display text-xl font-bold text-ink">Recurring compliance activities</h2>
           <p className="mt-2 text-sm leading-relaxed text-mutedfg">Use this as a planning prompt, not a due-date calendar. Confirm applicable dates and requirements for each state and establishment before filing.</p>
-          <div className="mt-4 overflow-hidden rounded-2xl border border-line">
-            <table className="w-full text-left text-sm">
+          <div className="mt-4 overflow-x-auto rounded-2xl border border-line">
+            <table className="w-full min-w-[620px] text-left text-sm">
               <thead className="bg-navy-900 text-white">
                 <tr><th className="px-4 py-3">Cadence</th><th className="px-4 py-3">Task</th><th className="px-4 py-3">Law</th></tr>
               </thead>
@@ -585,7 +561,7 @@ export function LegalPage({ kind }: { kind: "privacy" | "terms" }) {
         sub={privacy ? "How Lexus Consultants handles enquiry data submitted through this website." : "Terms governing use of the Lexus Consultants website and informational materials."}
         crumbs={[{ label: privacy ? "Privacy Policy" : "Terms of Use" }]}
       />
-      <article className="bg-white py-16">
+      <article className="bg-white py-12 md:py-14">
         <div className="mx-auto max-w-3xl space-y-5 px-6 text-sm leading-relaxed text-mutedfg">
           {privacy ? (
             <>

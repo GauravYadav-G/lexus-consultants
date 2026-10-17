@@ -18,14 +18,14 @@ export function Journey() {
   const line = useSpring(scrollYProgress, { stiffness: 90, damping: 26 });
 
   return (
-    <section className="relative overflow-hidden bg-navy-950 py-24 text-white md:py-32">
+    <section className="relative overflow-hidden bg-navy-950 py-16 md:py-20 text-white">
       <div className="grid-lines absolute inset-0 opacity-40" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-36">
               <Reveal><Eyebrow light>Our Practice Evolution</Eyebrow></Reveal>
-              <h2 className="mt-6 max-w-lg font-display text-[2.2rem] leading-[1.1] font-semibold tracking-[-0.025em] md:text-[3.15rem]">
+              <h2 className="mt-6 max-w-lg font-display text-[1.9rem] leading-[1.12] font-semibold tracking-[-0.025em] md:text-[2.6rem]">
                 <WordReveal text="Three decades of dependable legal and labour counsel." />
               </h2>
               <Reveal delay={0.12}>
@@ -142,9 +142,10 @@ export function HealthCheck() {
   };
 
   return (
-    <section className="bg-white py-24 md:py-32 border-t border-line">
+    <section className="bg-white py-16 md:py-20 border-t border-line">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHead
+          compact
           eyebrow="Interactive Diagnostic · 60 Seconds"
           title="Check your organisation's compliance health."
           sub="Answer 5 straightforward statutory questions to instantly identify notice risks, filing vulnerabilities, and audit preparedness."
@@ -182,7 +183,7 @@ export function HealthCheck() {
                     exit={{ opacity: 0, x: -24 }}
                     transition={{ duration: 0.3, ease: EASE }}
                   >
-                    <h3 className="font-display text-xl leading-snug font-bold text-ink md:text-2xl">
+                    <h3 className="font-display text-lg leading-snug font-bold text-ink md:text-xl">
                       {healthQuestions[step].q}
                     </h3>
                     <p className="mt-2 text-xs text-mutedfg">{healthQuestions[step].hint}</p>
@@ -226,7 +227,7 @@ export function HealthCheck() {
                     className="text-center"
                   >
                     <ScoreDial score={score} />
-                    <h3 className="mt-5 font-display text-2xl font-bold text-navy-950">{tier.t}</h3>
+                    <h3 className="mt-5 font-display text-xl font-bold text-navy-950">{tier.t}</h3>
                     <p className="mx-auto mt-4 max-w-lg text-xs leading-relaxed text-mutedfg md:text-sm">
                       {tier.d}
                     </p>
@@ -265,10 +266,11 @@ export function HealthCheck() {
 /* ================= INSIGHTS & UPDATES (SafePoint Tempo) ================= */
 export function Insights() {
   return (
-    <section className="bg-muted py-24 md:py-32">
+    <section className="bg-muted py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHead
+          compact
             center={false}
             eyebrow="Advisory Insights"
             title="Labour law &amp; statutory briefings."

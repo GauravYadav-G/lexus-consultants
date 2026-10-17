@@ -35,6 +35,7 @@ export function SectionHead({
   light = false,
   center = true,
   highlight = [],
+  compact = false,
 }: {
   eyebrow: string;
   title: string;
@@ -42,6 +43,7 @@ export function SectionHead({
   light?: boolean;
   center?: boolean;
   highlight?: string[];
+  compact?: boolean;
 }) {
   return (
     <div className={`max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
@@ -49,7 +51,7 @@ export function SectionHead({
         <Eyebrow light={light}>{eyebrow}</Eyebrow>
       </Reveal>
       <h2
-        className={`mt-5 font-display text-[2.1rem] leading-[1.12] font-semibold tracking-tight md:text-[2.85rem] ${
+        className={`mt-5 font-display leading-[1.12] font-semibold tracking-tight ${compact ? "text-[1.8rem] md:text-[2.35rem]" : "text-[2.1rem] md:text-[2.85rem]"} ${
           light ? "text-white" : "text-ink"
         }`}
       >
