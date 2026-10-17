@@ -10,12 +10,14 @@ import {
 import { LabourLawConsultantsPage } from "./pages/LabourLawConsultantsPage";
 import { CalculatorsPage } from "./pages/CalculatorsPage";
 import { PageLoader } from "./components/PageLoader";
+import { UpdatesAnnouncement } from "./components/UpdatesAnnouncement";
 
 export default function App() {
   return (
     <>
       <PageLoader />
       <HashRouter>
+        <UpdatesAnnouncement />
         <ScrollToTop />
         <ScrollProgress />
         <Header />

@@ -7,6 +7,7 @@ import { Newsletter } from "../components/Page";
 import { PracticalSupport } from "../components/home/PracticalSupport";
 import { ViewAllInsightsLink } from "../components/home/ViewAllInsightsLink";
 import { ViewAllFaqsLink } from "../components/home/ViewAllFaqsLink";
+import { LegalUpdates } from "../components/home/LegalUpdates";
 
 export function Home() {
   return (
@@ -26,6 +27,7 @@ export function Home() {
       <Reveal><PracticalSupport /></Reveal>
 
       <Reveal><Laws /></Reveal>
+      <Reveal><LegalUpdates /></Reveal>
       <Reveal><Insights /></Reveal>
       <Reveal><ViewAllInsightsLink /></Reveal>
       <Reveal><Presence /></Reveal>

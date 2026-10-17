@@ -13,6 +13,7 @@ import { Icon, SectionHead } from "../components/ui";
 import { Item, Stagger, Counter } from "../components/motion";
 import { PageHero, PageShell } from "../components/Page";
 import { WhatsAppIcon } from "../components/WhatsAppIcon";
+import { LegalUpdates } from "../components/home/LegalUpdates";
 import aboutImg from "../assets/about.jpg";
 
 /* ================= ABOUT ================= */
@@ -308,12 +309,15 @@ export function InsightsPage() {
     <PageShell>
       <PageHero
         eyebrow="Insights"
-        title="Latest labour-law updates."
-        sub="Practical guidance on labour law compliance, the Labour Codes and the steps employers can take to review their policies and records."
+        title="Labour law updates & employer insights."
+        sub="Track dated regulatory changes with official sources, then explore practical guides for your compliance and HR teams."
         crumbs={[{ label: "Insights" }]}
       />
+      <LegalUpdates />
       <section className="bg-white py-12 md:py-14">
-        <div className="mx-auto grid max-w-7xl gap-6 px-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <SectionHead compact center={false} eyebrow="Guides & Explainers" title="Practical employer guidance." sub="Background and action-oriented reading on labour law compliance." />
+          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {insights.map((a) => (
             <Link key={a.slug} to={`/insights/${a.slug}`} className="group flex flex-col rounded-2xl border border-line bg-cream p-7 transition hover:-translate-y-1 hover:shadow-xl">
               <div className="flex items-center justify-between text-[11px]">
@@ -325,6 +329,7 @@ export function InsightsPage() {
               <span className="mt-5 text-xs font-bold text-navy-900">{a.read} →</span>
             </Link>
           ))}
+          </div>
         </div>
       </section>
     </PageShell>

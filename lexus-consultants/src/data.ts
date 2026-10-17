@@ -483,6 +483,32 @@ export const insights = [
   },
 ];
 
+// Add new verified notifications here. Keep the source link and dates with each update.
+export const legalUpdates = [
+  {
+    id: "epfo-wage-ceiling-2026",
+    publishedAt: "2026-09-16",
+    effectiveAt: "2026-09-17",
+    tag: "EPFO · Central",
+    title: "EPFO mandatory coverage wage ceiling raised to ₹25,000",
+    summary: "The Ministry of Labour & Employment announced that the mandatory EPFO coverage ceiling increased from ₹15,000 to ₹25,000 per month, effective 17 September 2026.",
+    employerAction: "Review new-joiner eligibility, payroll setup and ECR processes. Confirm membership and contribution treatment against the applicable EPF rules for each employee.",
+    sourceLabel: "Ministry of Labour & Employment (PIB)",
+    sourceUrl: "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2310973&lang=1&reg=3",
+  },
+  {
+    id: "epfo-vishwas-2026",
+    publishedAt: "2026-09-03",
+    effectiveAt: "2026-06-29",
+    tag: "EPFO · Time-bound scheme",
+    title: "VISHWAS 2026: eligible EPF damages cases can be reviewed until 28 December",
+    summary: "The Ministry says the one-time VISHWAS 2026 scheme covers specified eligible damages and penalty cases, and remains open through 28 December 2026.",
+    employerAction: "If an EPF damages matter is pending, check the official scheme conditions, case eligibility and interest payment requirements before applying.",
+    sourceLabel: "Ministry of Labour & Employment (PIB)",
+    sourceUrl: "https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2306438&lang=2&reg=48",
+  },
+];
+
 export const monthlyDues = [
   { day: "Monthly", task: "Payroll processing and payslips", law: "Payroll and employment requirements" },
   { day: "Monthly / as applicable", task: "PF and ESI contribution review and filing", law: "Social security requirements" },
