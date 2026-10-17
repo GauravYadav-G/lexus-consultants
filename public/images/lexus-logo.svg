@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 36 886 216" role="img" aria-labelledby="title desc">
+  <title id="title">Lexus Consultants</title>
+  <desc id="desc">Lexus Consultants, Legal and Corporate Advisory</desc>
+  <path transform="translate(7 30) scale(.78)" d="M185 44 C168 35 148 43 134 61 C109 94 95 143 82 191 C70 237 59 258 30 271 C62 269 105 267 142 266 C183 266 209 273 226 261 C243 249 250 228 240 211 C226 232 205 239 174 238 C151 237 139 226 142 208 C149 157 172 90 198 66 C211 54 225 55 236 71 C249 92 263 91 275 81 C291 67 288 45 270 32 C245 14 211 25 185 44 Z" fill="#e10b0b"/>
+  <g fill="#071d73">
+    <text x="8" y="193" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-style="italic" font-weight="700" letter-spacing="-5">Lexus</text>
+    <text x="252" y="160" textLength="625" lengthAdjust="spacingAndGlyphs" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-style="italic" font-weight="700" letter-spacing="-2">Lexus Consultants</text>
+    <text x="295" y="229" textLength="550" lengthAdjust="spacingAndGlyphs" font-family="Georgia, 'Times New Roman', serif" font-size="37" letter-spacing="0.2">Legal &amp; Corporate Advisory</text>
+  </g>
+</svg>

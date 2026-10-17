@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  /* Deep Executive Navy */
+  --color-navy-950: #050d24;
+  --color-navy-900: #09173d;
+  --color-navy-800: #102354;
+  --color-navy-700: #1b3577;
+  --color-navy-600: #294da0;
+
+  /* Signature Lexus Red (from logo monogram) */
+  --color-crimson-600: #c92127;
+  --color-crimson-500: #dc2626;
+  --color-crimson-400: #ef4444;
+  --color-crimson-100: #fee2e2;
+  --color-crimson-50: #fef2f2;
+
+  /* Sophisticated Gold / Amber Accents */
+  --color-gold-500: #d4a558;
+  --color-gold-400: #e2ba74;
+  --color-gold-300: #f1d59d;
+  --color-gold-100: #fcf6eb;
+  --color-gold-50: #fdfaf4;
+
+  /* SafePoint Cream Canvas & Neutrals */
+  --color-cream: #fdfcf9;
+  --color-cream-card: #ffffff;
+  --color-muted: #f2f5f9;
+  --color-muted-dark: #e8edf4;
+  --color-ink: #091123;
+  --color-mutedfg: #586174;
+  --color-line: #e1e6ed;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  @apply bg-cream font-sans text-mutedfg;
+}
+
+::selection {
+  background: #09173d;
+  color: #fdfcf9;
+}
+
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: #f2f5f9; }
+::-webkit-scrollbar-thumb { background: #09173d; border-radius: 99px; border: 2px solid #f2f5f9; }
+
+/* Subtle SafePoint grid textures */
+.grid-light {
+  background-image:
+    linear-gradient(to right, rgba(9, 23, 61, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(9, 23, 61, 0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+.grid-lines {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Shimmer button highlight */
+@keyframes shimmer {
+  100% { transform: translateX(200%); }
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+}
+.shimmer:hover::after {
+  animation: shimmer 0.9s ease;
+}
+
+/* Marquee continuous scroll */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.marquee-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Subtle float animation */
+@keyframes float-slow {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -18px, 0); }
+}
+.animate-float-slow {
+  animation: float-slow 12s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
